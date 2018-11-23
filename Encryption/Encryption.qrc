@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Encryption">
+        <file>sinnowa.png</file>
+        <file>dongnan.png</file>
+    </qresource>
+</RCC>
