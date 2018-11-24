@@ -4,13 +4,26 @@ Encryption::Encryption(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	
 }
 
 void Encryption::button_encrypt_clicked()
 {
 	//密钥
-	string strKey = ui.lineEdit_key->text().toStdString();
+	QString qKey = ui.lineEdit_key->text();
+	if (qKey.isEmpty())
+	{
+		//错误提示
+		QToolTip::showText(ui.lineEdit_key->mapToGlobal(QPoint(0, 0)),str2qstr("当前输入为空"));
+		//编辑框变红
+		ui.lineEdit_key->setStyleSheet("QLineEdit{border:1px solid red }");
+		return;
+	}
+	else
+	{
+		//恢复之前形态
+		ui.lineEdit_key->setStyleSheet("QLineEdit{border:1px solid gray border-radius:1px}");
+	}
+	string strKey = qstr2str(qKey);
 	int lenKey = strKey.length();
 	char key[17] = "";
 	for (int i = 0; i < lenKey&&i < 16; i++)
@@ -18,7 +31,21 @@ void Encryption::button_encrypt_clicked()
 		key[i] = strKey.at(i);
 	}
 	//明文
-	string strText = qstr2str(ui.lineEdit_text->text());
+	QString qText = ui.lineEdit_text->text();
+	if (qText.isEmpty())
+	{
+		//错误提示
+		QToolTip::showText(ui.lineEdit_text->mapToGlobal(QPoint(0, 0)), str2qstr("当前明文为空"));
+		//编辑框变红
+		ui.lineEdit_text->setStyleSheet("QLineEdit{border:1px solid red }");
+		return;
+	}
+	else
+	{
+		//恢复之前形态
+		ui.lineEdit_text->setStyleSheet("QLineEdit{border:1px solid gray border-radius:1px}");
+	}
+	string strText = qstr2str(qText);
 	int lenText = strText.length();
 	char text[17] = "";
 	for (int i = 0; i < lenText; i++)
@@ -45,7 +72,21 @@ string Encryption::qstr2str(const QString qstr)
 void Encryption::button_decrypt_clicked()
 {
 	//密钥
-	string strKey = ui.lineEdit_key->text().toStdString();
+	QString qKey = ui.lineEdit_key->text();
+	if (qKey.isEmpty())
+	{
+		//错误提示
+		QToolTip::showText(ui.lineEdit_key->mapToGlobal(QPoint(0, 0)), str2qstr("当前密钥为空"));
+		//编辑框变红
+		ui.lineEdit_key->setStyleSheet("QLineEdit{border:1px solid red }");
+		return;
+	}
+	else
+	{
+		//恢复之前形态
+		ui.lineEdit_key->setStyleSheet("QLineEdit{border:1px solid gray border-radius:1px}");
+	}
+	string strKey = qstr2str(qKey);
 	int lenKey = strKey.length();
 	char key[17] = "";
 	for (int i = 0; i < lenKey&&i < 16; i++)
@@ -53,7 +94,21 @@ void Encryption::button_decrypt_clicked()
 		key[i] = strKey.at(i);
 	}
 	//密文
-	string strCip = ui.lineEdit_ciphertext->text().toStdString();
+	QString qCip = ui.lineEdit_ciphertext->text();
+	if (qCip.isEmpty())
+	{
+		//错误提示
+		QToolTip::showText(ui.lineEdit_ciphertext->mapToGlobal(QPoint(0, 0)), str2qstr("当前密文为空"));
+		//编辑框变红
+		ui.lineEdit_ciphertext->setStyleSheet("QLineEdit{border:1px solid red }");
+		return;
+	}
+	else
+	{
+		//恢复之前形态
+		ui.lineEdit_ciphertext->setStyleSheet("QLineEdit{border:1px solid gray border-radius:1px}");
+	}
+	string strCip = qstr2str(qCip);
 	int lenCip = strCip.length();
 	char cip[33] = "";
 	for (int i = 0; i < lenCip; i++)

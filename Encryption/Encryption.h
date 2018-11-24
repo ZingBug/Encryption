@@ -4,6 +4,7 @@
 #include "ui_Encryption.h"
 #include <string>
 #include "AES.h"
+#include <QToolTip>
 
 using namespace std;
 
