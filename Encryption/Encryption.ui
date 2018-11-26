@@ -21,7 +21,7 @@
    <widget class="QPushButton" name="button_encrypt">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>530</x>
       <y>100</y>
       <width>120</width>
       <height>30</height>
@@ -40,8 +40,8 @@
    <widget class="QPushButton" name="button_decrypt">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>140</y>
+      <x>530</x>
+      <y>150</y>
       <width>120</width>
       <height>30</height>
      </rect>
@@ -54,6 +54,44 @@
     </property>
     <property name="text">
      <string>解密</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_decrypt_2">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>200</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>写入IC卡</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_decrypt_3">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>250</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>读取IC卡</string>
     </property>
    </widget>
    <widget class="QWidget" name="">
