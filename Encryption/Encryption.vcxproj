@@ -116,6 +116,7 @@
     <ClCompile Include="AES.cpp" />
     <ClCompile Include="Encryption.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SHA256.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Encryption.h" />
@@ -128,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AES.h" />
+    <ClInclude Include="SHA256.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -5,6 +5,7 @@
 #include <string>
 #include "AES.h"
 #include <QToolTip>
+#include "SHA256.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
 private:
 	Ui::EncryptionClass ui;
 	AES aes;
+	char *salt = "dongnandaxue";
 	QString str2qstr(const string str);
 	string qstr2str(const QString qstr);
 
