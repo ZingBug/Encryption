@@ -22,8 +22,11 @@ private:
 	char *salt = "dongnandaxue";
 	QString str2qstr(const string str);
 	string qstr2str(const QString qstr);
+	void stringToHtmlFilter(QString &str);
+	void stringToHtml(QString &str, QColor crl);
 
 public slots:
 	void button_encrypt_clicked();
 	void button_decrypt_clicked();
+	void textBrowser_message_textChanged();
 };

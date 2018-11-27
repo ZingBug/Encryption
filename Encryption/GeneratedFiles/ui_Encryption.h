@@ -20,6 +20,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
@@ -33,7 +34,9 @@ public:
     QWidget *centralWidget;
     QPushButton *button_encrypt;
     QPushButton *button_decrypt;
-    QWidget *widget;
+    QPushButton *button_decrypt_2;
+    QPushButton *button_decrypt_3;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_10;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
@@ -98,6 +101,7 @@ public:
     QVBoxLayout *verticalLayout_9;
     QLabel *label_cal8;
     QLineEdit *lineEdit_cal8;
+    QTextBrowser *textBrowser_message;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -106,7 +110,7 @@ public:
     {
         if (EncryptionClass->objectName().isEmpty())
             EncryptionClass->setObjectName(QStringLiteral("EncryptionClass"));
-        EncryptionClass->resize(685, 605);
+        EncryptionClass->resize(685, 627);
         QIcon icon;
         icon.addFile(QStringLiteral(":/Encryption/dongnan.png"), QSize(), QIcon::Normal, QIcon::Off);
         EncryptionClass->setWindowIcon(icon);
@@ -114,19 +118,27 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         button_encrypt = new QPushButton(centralWidget);
         button_encrypt->setObjectName(QStringLiteral("button_encrypt"));
-        button_encrypt->setGeometry(QRect(540, 100, 120, 30));
+        button_encrypt->setGeometry(QRect(530, 100, 120, 30));
         QFont font;
         font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font.setPointSize(12);
         button_encrypt->setFont(font);
         button_decrypt = new QPushButton(centralWidget);
         button_decrypt->setObjectName(QStringLiteral("button_decrypt"));
-        button_decrypt->setGeometry(QRect(540, 140, 120, 30));
+        button_decrypt->setGeometry(QRect(530, 150, 120, 30));
         button_decrypt->setFont(font);
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(20, 20, 478, 522));
-        verticalLayout_10 = new QVBoxLayout(widget);
+        button_decrypt_2 = new QPushButton(centralWidget);
+        button_decrypt_2->setObjectName(QStringLiteral("button_decrypt_2"));
+        button_decrypt_2->setGeometry(QRect(530, 200, 120, 30));
+        button_decrypt_2->setFont(font);
+        button_decrypt_3 = new QPushButton(centralWidget);
+        button_decrypt_3->setObjectName(QStringLiteral("button_decrypt_3"));
+        button_decrypt_3->setGeometry(QRect(530, 250, 120, 30));
+        button_decrypt_3->setFont(font);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(20, 20, 478, 543));
+        verticalLayout_10 = new QVBoxLayout(layoutWidget);
         verticalLayout_10->setSpacing(6);
         verticalLayout_10->setContentsMargins(11, 11, 11, 11);
         verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
@@ -137,7 +149,7 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        label_province = new QLabel(widget);
+        label_province = new QLabel(layoutWidget);
         label_province->setObjectName(QStringLiteral("label_province"));
         label_province->setMinimumSize(QSize(60, 30));
         label_province->setFont(font);
@@ -148,7 +160,7 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        lineEdit_province = new QLineEdit(widget);
+        lineEdit_province = new QLineEdit(layoutWidget);
         lineEdit_province->setObjectName(QStringLiteral("lineEdit_province"));
         lineEdit_province->setEnabled(true);
         lineEdit_province->setMinimumSize(QSize(340, 30));
@@ -168,7 +180,7 @@ public:
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
-        label_expData = new QLabel(widget);
+        label_expData = new QLabel(layoutWidget);
         label_expData->setObjectName(QStringLiteral("label_expData"));
         label_expData->setMinimumSize(QSize(60, 30));
         label_expData->setFont(font);
@@ -179,7 +191,7 @@ public:
 
         horizontalLayout_9->addItem(horizontalSpacer_9);
 
-        lineEdit_expData = new QLineEdit(widget);
+        lineEdit_expData = new QLineEdit(layoutWidget);
         lineEdit_expData->setObjectName(QStringLiteral("lineEdit_expData"));
         lineEdit_expData->setEnabled(true);
         lineEdit_expData->setMinimumSize(QSize(340, 30));
@@ -194,7 +206,7 @@ public:
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setSpacing(6);
         horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
-        label_reagentApp = new QLabel(widget);
+        label_reagentApp = new QLabel(layoutWidget);
         label_reagentApp->setObjectName(QStringLiteral("label_reagentApp"));
         label_reagentApp->setMinimumSize(QSize(60, 30));
         label_reagentApp->setFont(font);
@@ -205,7 +217,7 @@ public:
 
         horizontalLayout_8->addItem(horizontalSpacer_8);
 
-        lineEdit_reagentApp = new QLineEdit(widget);
+        lineEdit_reagentApp = new QLineEdit(layoutWidget);
         lineEdit_reagentApp->setObjectName(QStringLiteral("lineEdit_reagentApp"));
         lineEdit_reagentApp->setEnabled(true);
         lineEdit_reagentApp->setMinimumSize(QSize(340, 30));
@@ -220,7 +232,7 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        label_reagentID = new QLabel(widget);
+        label_reagentID = new QLabel(layoutWidget);
         label_reagentID->setObjectName(QStringLiteral("label_reagentID"));
         label_reagentID->setMinimumSize(QSize(60, 30));
         label_reagentID->setFont(font);
@@ -231,7 +243,7 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
-        lineEdit_reagentID = new QLineEdit(widget);
+        lineEdit_reagentID = new QLineEdit(layoutWidget);
         lineEdit_reagentID->setObjectName(QStringLiteral("lineEdit_reagentID"));
         lineEdit_reagentID->setEnabled(true);
         lineEdit_reagentID->setMinimumSize(QSize(340, 30));
@@ -249,7 +261,7 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        label_reagentNum = new QLabel(widget);
+        label_reagentNum = new QLabel(layoutWidget);
         label_reagentNum->setObjectName(QStringLiteral("label_reagentNum"));
         label_reagentNum->setMinimumSize(QSize(60, 30));
         label_reagentNum->setFont(font);
@@ -260,7 +272,7 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer_3);
 
-        lineEdit_reagentNum = new QLineEdit(widget);
+        lineEdit_reagentNum = new QLineEdit(layoutWidget);
         lineEdit_reagentNum->setObjectName(QStringLiteral("lineEdit_reagentNum"));
         lineEdit_reagentNum->setEnabled(true);
         lineEdit_reagentNum->setMinimumSize(QSize(340, 30));
@@ -276,7 +288,7 @@ public:
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        label_FxKey = new QLabel(widget);
+        label_FxKey = new QLabel(layoutWidget);
         label_FxKey->setObjectName(QStringLiteral("label_FxKey"));
         label_FxKey->setMinimumSize(QSize(60, 30));
         label_FxKey->setFont(font);
@@ -288,7 +300,7 @@ public:
 
         horizontalLayout_4->addItem(horizontalSpacer_4);
 
-        lineEdit_FxKey = new QLineEdit(widget);
+        lineEdit_FxKey = new QLineEdit(layoutWidget);
         lineEdit_FxKey->setObjectName(QStringLiteral("lineEdit_FxKey"));
         lineEdit_FxKey->setEnabled(true);
         lineEdit_FxKey->setMinimumSize(QSize(340, 30));
@@ -304,7 +316,7 @@ public:
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        label_DxKey = new QLabel(widget);
+        label_DxKey = new QLabel(layoutWidget);
         label_DxKey->setObjectName(QStringLiteral("label_DxKey"));
         label_DxKey->setMinimumSize(QSize(60, 30));
         label_DxKey->setFont(font);
@@ -316,7 +328,7 @@ public:
 
         horizontalLayout_5->addItem(horizontalSpacer_5);
 
-        lineEdit_DxKey = new QLineEdit(widget);
+        lineEdit_DxKey = new QLineEdit(layoutWidget);
         lineEdit_DxKey->setObjectName(QStringLiteral("lineEdit_DxKey"));
         lineEdit_DxKey->setEnabled(true);
         lineEdit_DxKey->setMinimumSize(QSize(340, 30));
@@ -332,7 +344,7 @@ public:
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(0);
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
-        label_ciphertext = new QLabel(widget);
+        label_ciphertext = new QLabel(layoutWidget);
         label_ciphertext->setObjectName(QStringLiteral("label_ciphertext"));
         label_ciphertext->setMinimumSize(QSize(60, 30));
         label_ciphertext->setMaximumSize(QSize(16777215, 40));
@@ -345,7 +357,7 @@ public:
 
         horizontalLayout_6->addItem(horizontalSpacer_6);
 
-        textEdit_ciphertext = new QTextEdit(widget);
+        textEdit_ciphertext = new QTextEdit(layoutWidget);
         textEdit_ciphertext->setObjectName(QStringLiteral("textEdit_ciphertext"));
         textEdit_ciphertext->setMinimumSize(QSize(340, 0));
         textEdit_ciphertext->setMaximumSize(QSize(340, 50));
@@ -359,7 +371,7 @@ public:
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(0);
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        label_sha = new QLabel(widget);
+        label_sha = new QLabel(layoutWidget);
         label_sha->setObjectName(QStringLiteral("label_sha"));
         label_sha->setMinimumSize(QSize(60, 30));
         label_sha->setFont(font);
@@ -371,11 +383,13 @@ public:
 
         horizontalLayout_7->addItem(horizontalSpacer_7);
 
-        textEdit_sha = new QTextEdit(widget);
+        textEdit_sha = new QTextEdit(layoutWidget);
         textEdit_sha->setObjectName(QStringLiteral("textEdit_sha"));
         textEdit_sha->setMinimumSize(QSize(340, 0));
         textEdit_sha->setMaximumSize(QSize(16777215, 50));
         textEdit_sha->setFont(font2);
+        textEdit_sha->setFocusPolicy(Qt::NoFocus);
+        textEdit_sha->setFrameShape(QFrame::StyledPanel);
 
         horizontalLayout_7->addWidget(textEdit_sha);
 
@@ -391,7 +405,7 @@ public:
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        label_cal1 = new QLabel(widget);
+        label_cal1 = new QLabel(layoutWidget);
         label_cal1->setObjectName(QStringLiteral("label_cal1"));
         label_cal1->setMaximumSize(QSize(80, 30));
         QFont font3;
@@ -401,7 +415,7 @@ public:
 
         verticalLayout_2->addWidget(label_cal1);
 
-        lineEdit_cal1 = new QLineEdit(widget);
+        lineEdit_cal1 = new QLineEdit(layoutWidget);
         lineEdit_cal1->setObjectName(QStringLiteral("lineEdit_cal1"));
         lineEdit_cal1->setMinimumSize(QSize(0, 30));
         lineEdit_cal1->setMaximumSize(QSize(80, 30));
@@ -416,14 +430,14 @@ public:
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        label_cal2 = new QLabel(widget);
+        label_cal2 = new QLabel(layoutWidget);
         label_cal2->setObjectName(QStringLiteral("label_cal2"));
         label_cal2->setMaximumSize(QSize(80, 30));
         label_cal2->setFont(font3);
 
         verticalLayout_3->addWidget(label_cal2);
 
-        lineEdit_cal2 = new QLineEdit(widget);
+        lineEdit_cal2 = new QLineEdit(layoutWidget);
         lineEdit_cal2->setObjectName(QStringLiteral("lineEdit_cal2"));
         lineEdit_cal2->setMinimumSize(QSize(0, 30));
         lineEdit_cal2->setMaximumSize(QSize(80, 16777215));
@@ -438,14 +452,14 @@ public:
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        label_cal3 = new QLabel(widget);
+        label_cal3 = new QLabel(layoutWidget);
         label_cal3->setObjectName(QStringLiteral("label_cal3"));
         label_cal3->setMaximumSize(QSize(80, 30));
         label_cal3->setFont(font3);
 
         verticalLayout_4->addWidget(label_cal3);
 
-        lineEdit_cal3 = new QLineEdit(widget);
+        lineEdit_cal3 = new QLineEdit(layoutWidget);
         lineEdit_cal3->setObjectName(QStringLiteral("lineEdit_cal3"));
         lineEdit_cal3->setMinimumSize(QSize(0, 30));
         lineEdit_cal3->setMaximumSize(QSize(80, 16777215));
@@ -460,14 +474,14 @@ public:
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
-        label_cal4 = new QLabel(widget);
+        label_cal4 = new QLabel(layoutWidget);
         label_cal4->setObjectName(QStringLiteral("label_cal4"));
         label_cal4->setMaximumSize(QSize(80, 30));
         label_cal4->setFont(font3);
 
         verticalLayout_5->addWidget(label_cal4);
 
-        lineEdit_cal4 = new QLineEdit(widget);
+        lineEdit_cal4 = new QLineEdit(layoutWidget);
         lineEdit_cal4->setObjectName(QStringLiteral("lineEdit_cal4"));
         lineEdit_cal4->setMinimumSize(QSize(0, 30));
         lineEdit_cal4->setMaximumSize(QSize(80, 16777215));
@@ -488,14 +502,14 @@ public:
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setSpacing(6);
         verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
-        label_cal5 = new QLabel(widget);
+        label_cal5 = new QLabel(layoutWidget);
         label_cal5->setObjectName(QStringLiteral("label_cal5"));
         label_cal5->setMaximumSize(QSize(80, 30));
         label_cal5->setFont(font3);
 
         verticalLayout_6->addWidget(label_cal5);
 
-        lineEdit_cal5 = new QLineEdit(widget);
+        lineEdit_cal5 = new QLineEdit(layoutWidget);
         lineEdit_cal5->setObjectName(QStringLiteral("lineEdit_cal5"));
         lineEdit_cal5->setMinimumSize(QSize(0, 30));
         lineEdit_cal5->setMaximumSize(QSize(80, 16777215));
@@ -510,14 +524,14 @@ public:
         verticalLayout_7 = new QVBoxLayout();
         verticalLayout_7->setSpacing(6);
         verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
-        label_cal6 = new QLabel(widget);
+        label_cal6 = new QLabel(layoutWidget);
         label_cal6->setObjectName(QStringLiteral("label_cal6"));
         label_cal6->setMaximumSize(QSize(80, 30));
         label_cal6->setFont(font3);
 
         verticalLayout_7->addWidget(label_cal6);
 
-        lineEdit_cal6 = new QLineEdit(widget);
+        lineEdit_cal6 = new QLineEdit(layoutWidget);
         lineEdit_cal6->setObjectName(QStringLiteral("lineEdit_cal6"));
         lineEdit_cal6->setMinimumSize(QSize(0, 30));
         lineEdit_cal6->setMaximumSize(QSize(80, 16777215));
@@ -532,14 +546,14 @@ public:
         verticalLayout_8 = new QVBoxLayout();
         verticalLayout_8->setSpacing(6);
         verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
-        label_cal7 = new QLabel(widget);
+        label_cal7 = new QLabel(layoutWidget);
         label_cal7->setObjectName(QStringLiteral("label_cal7"));
         label_cal7->setMaximumSize(QSize(80, 30));
         label_cal7->setFont(font3);
 
         verticalLayout_8->addWidget(label_cal7);
 
-        lineEdit_cal7 = new QLineEdit(widget);
+        lineEdit_cal7 = new QLineEdit(layoutWidget);
         lineEdit_cal7->setObjectName(QStringLiteral("lineEdit_cal7"));
         lineEdit_cal7->setMinimumSize(QSize(0, 30));
         lineEdit_cal7->setMaximumSize(QSize(80, 16777215));
@@ -554,14 +568,14 @@ public:
         verticalLayout_9 = new QVBoxLayout();
         verticalLayout_9->setSpacing(6);
         verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
-        label_cal8 = new QLabel(widget);
+        label_cal8 = new QLabel(layoutWidget);
         label_cal8->setObjectName(QStringLiteral("label_cal8"));
         label_cal8->setMaximumSize(QSize(80, 30));
         label_cal8->setFont(font3);
 
         verticalLayout_9->addWidget(label_cal8);
 
-        lineEdit_cal8 = new QLineEdit(widget);
+        lineEdit_cal8 = new QLineEdit(layoutWidget);
         lineEdit_cal8->setObjectName(QStringLiteral("lineEdit_cal8"));
         lineEdit_cal8->setMinimumSize(QSize(0, 30));
         lineEdit_cal8->setMaximumSize(QSize(80, 16777215));
@@ -576,6 +590,12 @@ public:
 
         verticalLayout_10->addLayout(horizontalLayout_10);
 
+        textBrowser_message = new QTextBrowser(centralWidget);
+        textBrowser_message->setObjectName(QStringLiteral("textBrowser_message"));
+        textBrowser_message->setGeometry(QRect(530, 330, 120, 181));
+        textBrowser_message->setFont(font);
+        textBrowser_message->setFrameShape(QFrame::WinPanel);
+        textBrowser_message->setFrameShadow(QFrame::Sunken);
         EncryptionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EncryptionClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -591,6 +611,7 @@ public:
         retranslateUi(EncryptionClass);
         QObject::connect(button_encrypt, SIGNAL(clicked()), EncryptionClass, SLOT(button_encrypt_clicked()));
         QObject::connect(button_decrypt, SIGNAL(clicked()), EncryptionClass, SLOT(button_decrypt_clicked()));
+        QObject::connect(textBrowser_message, SIGNAL(textChanged()), EncryptionClass, SLOT(textBrowser_message_textChanged()));
 
         QMetaObject::connectSlotsByName(EncryptionClass);
     } // setupUi
@@ -600,6 +621,8 @@ public:
         EncryptionClass->setWindowTitle(QApplication::translate("EncryptionClass", "Encryption", nullptr));
         button_encrypt->setText(QApplication::translate("EncryptionClass", "\345\212\240\345\257\206", nullptr));
         button_decrypt->setText(QApplication::translate("EncryptionClass", "\350\247\243\345\257\206", nullptr));
+        button_decrypt_2->setText(QApplication::translate("EncryptionClass", "\345\206\231\345\205\245IC\345\215\241", nullptr));
+        button_decrypt_3->setText(QApplication::translate("EncryptionClass", "\350\257\273\345\217\226IC\345\215\241", nullptr));
         label_province->setText(QApplication::translate("EncryptionClass", "\347\234\201\344\273\275\357\274\232", nullptr));
         label_expData->setText(QApplication::translate("EncryptionClass", "\346\234\211\346\225\210\346\227\245\346\234\237\357\274\232", nullptr));
         label_reagentApp->setText(QApplication::translate("EncryptionClass", "\350\257\225\345\211\202\345\272\224\347\224\250\357\274\232", nullptr));

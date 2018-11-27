@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>685</width>
-    <height>605</height>
+    <height>627</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,13 +94,13 @@
      <string>读取IC卡</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>20</y>
       <width>478</width>
-      <height>522</height>
+      <height>543</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -669,6 +669,12 @@
              <pointsize>14</pointsize>
             </font>
            </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
           </widget>
          </item>
         </layout>
@@ -1075,6 +1081,28 @@
      </item>
     </layout>
    </widget>
+   <widget class="QTextBrowser" name="textBrowser_message">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>330</y>
+      <width>120</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::WinPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1124,8 +1152,8 @@
    <slot>button_decrypt_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>520</x>
-     <y>205</y>
+     <x>530</x>
+     <y>214</y>
     </hint>
     <hint type="destinationlabel">
      <x>593</x>
@@ -1133,9 +1161,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>textBrowser_message</sender>
+   <signal>textChanged()</signal>
+   <receiver>EncryptionClass</receiver>
+   <slot>textBrowser_message_textChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>572</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>620</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>button_encrypt_clicked()</slot>
   <slot>button_decrypt_clicked()</slot>
+  <slot>textBrowser_message_textChanged()</slot>
  </slots>
 </ui>

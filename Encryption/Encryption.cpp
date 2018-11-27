@@ -25,6 +25,10 @@ void Encryption::button_encrypt_clicked()
 	string str_expData = qstr2str(ui.lineEdit_expData->text());//存入2
 	if (str_reagentApp.length() != 2 || str_reagentID.length() != 5 || str_province.length() != 2 || str_expData.length() != 8 || str_reagentNum.length() != 3)
 	{
+		QString str = str2qstr(string("输入错误!\n"));
+		QColor clrR(255, 0, 0);//红色
+		stringToHtml(str, clrR);
+		ui.textBrowser_message->insertHtml(str);
 		return;
 	}
 
@@ -51,6 +55,10 @@ void Encryption::button_encrypt_clicked()
 	{
 		if (cal[i] == 0 || cal[i] < 0 || cal[i]>3)
 		{
+			QString str = str2qstr(string("标定值错误!\n"));
+			QColor clrR(255, 0, 0);//红色
+			stringToHtml(str, clrR);
+			ui.textBrowser_message->insertHtml(str);
 			return;
 		}
 	}
@@ -137,6 +145,10 @@ void Encryption::button_encrypt_clicked()
 	}
 	ui.textEdit_ciphertext->setText(str2qstr((string)out4));//密文整体显示
 
+	QString str = str2qstr(string("加密成功!\n"));
+	QColor clrG(0, 255, 0);//绿色
+	stringToHtml(str, clrG);
+	ui.textBrowser_message->insertHtml(str);
 }
 
 QString Encryption::str2qstr(const string str)
@@ -148,6 +160,30 @@ string Encryption::qstr2str(const QString qstr)
 {
 	QByteArray cdata = qstr.toLocal8Bit();
 	return string(cdata);
+}
+
+void Encryption::stringToHtmlFilter(QString & str)
+{
+	//注意这几行代码的顺序不能乱，否则会造成多次替换
+	str.replace("&", "&amp;");
+	str.replace(">", "&gt;");
+	str.replace("<", "&lt;");
+	str.replace("\"", "&quot;");
+	str.replace("\'", "&#39;");
+	str.replace(" ", "&nbsp;");
+	str.replace("\n", "<br>");
+	str.replace("\r", "<br>");
+}
+
+void Encryption::stringToHtml(QString & str, QColor crl)
+{
+	stringToHtmlFilter(str);
+	QByteArray array;
+	array.append(crl.red());
+	array.append(crl.green());
+	array.append(crl.blue());
+	QString strC(array.toHex());
+	str = QString("<span style=\" color:#%1;\">%2</span>").arg(strC).arg(str);
 }
 
 void Encryption::button_decrypt_clicked()
@@ -162,7 +198,14 @@ void Encryption::button_decrypt_clicked()
 	}
 	//获取密文
 	string strCip = qstr2str(ui.textEdit_ciphertext->toPlainText());
-
+	if (strCip.length() < 64)
+	{
+		QString str = str2qstr(string("解密失败!\n"));
+		QColor clrR(255, 0, 0);//红色
+		stringToHtml(str, clrR);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
 	char cip1[33] = "";//第一部分密文
 	char cip2[33] = "";//第二部分密文
 	for (int i = 0; i < 32; i++)
@@ -179,6 +222,10 @@ void Encryption::button_decrypt_clicked()
 	aes.aesDecryptCode(cip1, 32, fxKey, out1);
 	if (out1[0] != -128)
 	{
+		QString str = str2qstr(string("解密失败!\n"));
+		QColor clrR(255, 0, 0);//红色
+		stringToHtml(str, clrR);
+		ui.textBrowser_message->insertHtml(str);
 		return;
 	}
 	int len = 1;
@@ -235,6 +282,10 @@ void Encryption::button_decrypt_clicked()
 	aes.aesDecryptCode(cip2, 32, dxKey, out3);//动态密钥解密
 	if (out3[0] != -128)
 	{
+		QString str = str2qstr(string("解密失败!\n"));
+		QColor clrR(255, 0, 0);//红色
+		stringToHtml(str, clrR);
+		ui.textBrowser_message->insertHtml(str);
 		return;
 	}
 	len = 1;
@@ -269,13 +320,22 @@ void Encryption::button_decrypt_clicked()
 	ui.lineEdit_reagentID->setText(str2qstr(str_reagentID));
 	ui.lineEdit_reagentNum->setText(str2qstr(str_reagentNum));
 
-	ui.lineEdit_cal1->setText(QString::number(cal[0], 'f', 2));
-	ui.lineEdit_cal2->setText(QString::number(cal[1], 'f', 2));
-	ui.lineEdit_cal3->setText(QString::number(cal[2], 'f', 2));
-	ui.lineEdit_cal4->setText(QString::number(cal[3], 'f', 2));
-	ui.lineEdit_cal5->setText(QString::number(cal[4], 'f', 2));
-	ui.lineEdit_cal6->setText(QString::number(cal[5], 'f', 2));
-	ui.lineEdit_cal7->setText(QString::number(cal[6], 'f', 2));
-	ui.lineEdit_cal8->setText(QString::number(cal[7], 'f', 2));
+	ui.lineEdit_cal1->setText(QString::number(cal[0], 'f', 1));
+	ui.lineEdit_cal2->setText(QString::number(cal[1], 'f', 1));
+	ui.lineEdit_cal3->setText(QString::number(cal[2], 'f', 1));
+	ui.lineEdit_cal4->setText(QString::number(cal[3], 'f', 1));
+	ui.lineEdit_cal5->setText(QString::number(cal[4], 'f', 1));
+	ui.lineEdit_cal6->setText(QString::number(cal[5], 'f', 1));
+	ui.lineEdit_cal7->setText(QString::number(cal[6], 'f', 1));
+	ui.lineEdit_cal8->setText(QString::number(cal[7], 'f', 1));
 
+	QString str = str2qstr(string("解密成功!\n"));
+	QColor clrG(0, 255, 0);//绿色
+	stringToHtml(str, clrG);
+	ui.textBrowser_message->insertHtml(str);
+}
+
+void Encryption::textBrowser_message_textChanged()
+{
+	ui.textBrowser_message->moveCursor(QTextCursor::End);
 }
