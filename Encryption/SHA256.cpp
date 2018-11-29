@@ -65,11 +65,11 @@ Message_Digest SHA256::deal(UInt32 M[16])
 	return MD;
 }
 
-Message_Digest SHA256::preDeal(UChar Y[Max])
+Message_Digest SHA256::preDeal(UChar Y[MAX_LENGTH])
 {
 	UInt32 i, j;
 	UInt32 T1 = 0, T2 = 0, T3 = 0, T4 = 0;
-	UChar temp[Max] = { 0 };
+	UChar temp[MAX_LENGTH] = { 0 };
 	UInt64 x = strlen((char *)Y);//数据长度  
 	UInt32 d = abs((int)(55 - x)) % 64;   //填充长度  
 	UInt32 n = (x + 8) / 64 + 1; //分组数  
@@ -91,7 +91,7 @@ Message_Digest SHA256::preDeal(UChar Y[Max])
 		temp[(n * 64) - i] = (UChar)(8 * x >> (i - 1) * 8);
 	}
 	//无符号字符转换为无符号整型  
-	for (i = 0; i < Max / 4; i++) {
+	for (i = 0; i < MAX_LENGTH / 4; i++) {
 		for (j = 0; j < 4; j++) {
 			if (j == 0)
 				T1 = temp[4 * i + j];
@@ -116,7 +116,7 @@ Message_Digest SHA256::preDeal(UChar Y[Max])
 
 void SHA256::shaCoding(char * in, int inlen, char * out)
 {
-	UChar Y[Max] = "";
+	UChar Y[MAX_LENGTH] = "";
 	for (int i = 0; i < inlen; i++)
 	{
 		Y[i] = (UChar)in[i];

@@ -16,7 +16,7 @@ typedef unsigned char UChar;
 #define SSigma_0(x) (rotL(x,25)^rotL(x,14)^shR(x,3))  
 #define SSigma_1(x) (rotL(x,15)^rotL(x,13)^shR(x,10)) 
 
-#define Max 1000//最大字符数  
+#define MAX_LENGTH 1000//最大字符数  
 
 //信息摘要结构  
 struct Message_Digest {
@@ -30,7 +30,7 @@ public:
 	void shaCoding(char *in, int inlen, char *out);
 private:
 	Message_Digest deal(UInt32 M[16]);//处理512比特数据，返回信息摘要  
-	Message_Digest preDeal(UChar Y[Max]);
+	Message_Digest preDeal(UChar Y[MAX_LENGTH]);
 	static const UInt32 K[64];//64个32比特字的常数（前64个素数的立方根小数前32位） 
 	void init();                //初始杂凑值  
 	int rotR(UInt32 W, int n);//右旋转  
@@ -39,7 +39,7 @@ private:
 private:
 	//信息摘要  
 	Message_Digest MD;
-	UInt32 W[Max / 4];//整型  
+	UInt32 W[MAX_LENGTH / 4];//整型  
 	UInt32 M[16];   //存分组信息  
 };
 

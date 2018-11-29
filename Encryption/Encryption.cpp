@@ -4,6 +4,35 @@ Encryption::Encryption(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+
+	//获取密钥和salt
+	QString qstr_key;
+	QString qstr_salt;
+	qstr_key = RWIniFile::readIni(RWIniFile::iniPath, "config1", "key", qstr_key);
+	qstr_salt = RWIniFile::readIni(RWIniFile::iniPath, "config1", "salt", qstr_salt);
+	if (qstr_key.length() == 0)
+	{
+		qstr_key = "0123456789abcdef";
+	}
+	if (qstr_salt.length() == 0)
+	{
+		qstr_salt = "sinnowa";
+	}
+	ui.lineEdit_FxKey->setText(qstr_key);
+	string str_salt = qstr2str(qstr_salt);
+	for (int i = 0; i < str_salt.length(); i++)
+	{
+		salt[i] = str_salt.at(i);
+	}
+
+	//获取串口
+	QStringList list = getEnableCommPort();
+	ui.comboBox_port->clear();
+	for (int i = 0; i < list.size(); i++)
+	{
+		QString str = list.at(i);
+		ui.comboBox_port->addItem(str);
+	}
 }
 
 void Encryption::button_encrypt_clicked()
@@ -186,6 +215,22 @@ void Encryption::stringToHtml(QString & str, QColor crl)
 	str = QString("<span style=\" color:#%1;\">%2</span>").arg(strC).arg(str);
 }
 
+QStringList Encryption::getEnableCommPort()
+{
+	QStringList commPortList;
+	foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
+	{
+		QSerialPort serial;
+		serial.setPort(info);
+		if (serial.open(QIODevice::ReadWrite))
+		{
+			commPortList.append(serial.portName());
+			serial.close();
+		}
+	}
+	return commPortList;
+}
+
 void Encryption::button_decrypt_clicked()
 {
 	//获取固定密钥
@@ -338,4 +383,153 @@ void Encryption::button_decrypt_clicked()
 void Encryption::textBrowser_message_textChanged()
 {
 	ui.textBrowser_message->moveCursor(QTextCursor::End);
+}
+
+wchar_t *Encryption::multiByteToWideChar(string str)
+{
+	const char* pCStrKey = str.c_str();
+	//第一次调用返回转换后的字符串长度，用于确认为wchar_t*开辟多大的内存空间
+	int pSize = MultiByteToWideChar(CP_OEMCP, 0, pCStrKey, strlen(pCStrKey) + 1, NULL, 0);
+	wchar_t *pWCStrKey = new wchar_t[pSize];
+	//第二次调用将单字节字符串转换成双字节字符串
+	MultiByteToWideChar(CP_OEMCP, 0, pCStrKey, strlen(pCStrKey) + 1, pWCStrKey, pSize);
+	return pWCStrKey;
+}
+
+void Encryption::button_readIC_clicked()
+{
+	string com = qstr2str(ui.comboBox_port->currentText());
+	const char* ccom = com.c_str();
+	SerialCard card;
+	bool flag = card.OpenSeialPort(multiByteToWideChar(com));
+	if (!flag)
+	{
+		QString str = str2qstr(string("开卡失败!\n"));
+		QColor clrG(255, 0, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	string pwd = "";
+	flag = card.read_card(pwd);
+	if (flag)
+	{
+		QString str = str2qstr(string("读卡失败!\n"));
+		QColor clrG(255, 0, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	else
+	{
+		ui.textEdit_ciphertext->setText(str2qstr(pwd));
+
+		QString str = str2qstr(string("读取成功!\n"));
+		QColor clrG(0, 255, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	return;
+}
+
+void Encryption::button_writeIC_clicked()
+{
+	string com = qstr2str(ui.comboBox_port->currentText());
+	string pwd = qstr2str(ui.textEdit_ciphertext->toPlainText());
+	if (pwd.length() != 64)
+	{
+		QString str = str2qstr(string("密文错误!\n"));
+		QColor clrG(255, 0, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	const char* ccom = com.c_str();
+	SerialCard card;
+	bool flag = card.OpenSeialPort(multiByteToWideChar(com));
+	if (!flag)
+	{
+		QString str = str2qstr(string("开卡失败!\n"));
+		QColor clrG(255, 0, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	
+	flag = card.write_card(pwd);
+	if (flag)
+	{
+		QString str = str2qstr(string("写入失败!\n"));
+		QColor clrG(255, 0, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	else
+	{
+		QString str = str2qstr(string("写入成功!\n"));
+		QColor clrG(0, 255, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	card.ClosePort();
+}
+
+
+
+void Encryption::comboBox_port_clicked()
+{
+	QStringList list = getEnableCommPort();
+	ui.comboBox_port->clear();
+	for (int i = 0; i < list.size(); i++)
+	{
+		QString str = list.at(i);
+		ui.comboBox_port->addItem(str);
+	}
+}
+
+void Encryption::action_setting_triggered()
+{
+	QInputDialog pwd(this);
+	pwd.setWindowTitle("Input Password");
+	pwd.setLabelText("Please input Password:");
+	pwd.setInputMode(QInputDialog::TextInput);//可选参数：DoubleInput  TextInput
+
+	if (pwd.exec() == QInputDialog::Accepted)
+	{
+		QString qpwd = pwd.textValue();
+		if (qpwd.compare(QString("1234")) == 0)
+		{
+			Setting *setting = new Setting();
+			setting->show();
+		}
+		else
+		{
+			QString str = str2qstr(string("密码错误!\n"));
+			QColor clrG(255, 0, 0);//红色
+			stringToHtml(str, clrG);
+			ui.textBrowser_message->insertHtml(str);
+		}
+	}
+}
+
+void Encryption::action_esc_triggered()
+{
+	
+	if (QMessageBox::Ok == QMessageBox::warning(this, "Tips", "Are you sure to quit the app?", QMessageBox::Ok, QMessageBox::No))
+	{
+		//this->close();
+		qApp->quit();
+	}
+	else
+	{
+		return;
+	}
+}
+
+void Encryption::button_clearMessage_clicked()
+{
+	ui.textBrowser_message->clear();
 }

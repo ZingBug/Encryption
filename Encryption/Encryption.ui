@@ -22,7 +22,7 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>100</y>
+      <y>20</y>
       <width>120</width>
       <height>30</height>
      </rect>
@@ -41,7 +41,7 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>150</y>
+      <y>70</y>
       <width>120</width>
       <height>30</height>
      </rect>
@@ -56,11 +56,11 @@
      <string>解密</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="button_decrypt_2">
+   <widget class="QPushButton" name="button_wirteIC">
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>200</y>
+      <y>120</y>
       <width>120</width>
       <height>30</height>
      </rect>
@@ -75,11 +75,11 @@
      <string>写入IC卡</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="button_decrypt_3">
+   <widget class="QPushButton" name="button_readIC">
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>250</y>
+      <y>170</y>
       <width>120</width>
       <height>30</height>
      </rect>
@@ -147,7 +147,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>30</height>
             </size>
            </property>
@@ -207,7 +207,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>30</height>
             </size>
            </property>
@@ -267,7 +267,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>30</height>
             </size>
            </property>
@@ -327,7 +327,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>30</height>
             </size>
            </property>
@@ -385,7 +385,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>30</height>
             </size>
            </property>
@@ -449,7 +449,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>30</height>
             </size>
            </property>
@@ -467,6 +467,9 @@
            </property>
            <property name="maxLength">
             <number>32767</number>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="readOnly">
             <bool>true</bool>
@@ -519,7 +522,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>30</height>
             </size>
            </property>
@@ -589,7 +592,7 @@
           <widget class="QTextEdit" name="textEdit_ciphertext">
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>0</height>
             </size>
            </property>
@@ -604,6 +607,9 @@
              <family>Consolas</family>
              <pointsize>14</pointsize>
             </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
            </property>
           </widget>
          </item>
@@ -653,7 +659,7 @@
           <widget class="QTextEdit" name="textEdit_sha">
            <property name="minimumSize">
             <size>
-             <width>340</width>
+             <width>360</width>
              <height>0</height>
             </size>
            </property>
@@ -1103,6 +1109,63 @@
      <enum>QFrame::Sunken</enum>
     </property>
    </widget>
+   <widget class="QLabel" name="label_port">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>230</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>选择串口：</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="MyComboBox" name="comboBox_port">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>260</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_clearMessage">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>530</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>清空消息栏</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1113,6 +1176,14 @@
      <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menusetting">
+    <property name="title">
+     <string>菜单</string>
+    </property>
+    <addaction name="action_setting"/>
+    <addaction name="action_esc"/>
+   </widget>
+   <addaction name="menusetting"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -1123,8 +1194,28 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_setting">
+   <property name="text">
+    <string>Setting</string>
+   </property>
+  </action>
+  <action name="action_esc">
+   <property name="text">
+    <string>ESC</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyComboBox</class>
+   <extends>QComboBox</extends>
+   <header>mycombobox.h</header>
+   <slots>
+    <signal>clicked()</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="Encryption.qrc"/>
  </resources>
@@ -1137,7 +1228,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
-     <y>160</y>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
      <x>478</x>
@@ -1153,7 +1244,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>214</y>
+     <y>134</y>
     </hint>
     <hint type="destinationlabel">
      <x>593</x>
@@ -1177,10 +1268,112 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>button_wirteIC</sender>
+   <signal>clicked()</signal>
+   <receiver>EncryptionClass</receiver>
+   <slot>button_writeIC_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>643</x>
+     <y>184</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>669</x>
+     <y>224</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_readIC</sender>
+   <signal>clicked()</signal>
+   <receiver>EncryptionClass</receiver>
+   <slot>button_readIC_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>234</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>519</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_port</sender>
+   <signal>clicked()</signal>
+   <receiver>EncryptionClass</receiver>
+   <slot>comboBox_port_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>636</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>667</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_esc</sender>
+   <signal>triggered()</signal>
+   <receiver>EncryptionClass</receiver>
+   <slot>action_esc_triggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>342</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_setting</sender>
+   <signal>triggered()</signal>
+   <receiver>EncryptionClass</receiver>
+   <slot>action_setting_triggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>342</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_clearMessage</sender>
+   <signal>clicked()</signal>
+   <receiver>EncryptionClass</receiver>
+   <slot>button_clearMessage_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>645</x>
+     <y>573</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>551</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>button_encrypt_clicked()</slot>
   <slot>button_decrypt_clicked()</slot>
   <slot>textBrowser_message_textChanged()</slot>
+  <slot>button_readIC_clicked()</slot>
+  <slot>button_writeIC_clicked()</slot>
+  <slot>comboBox_port_clicked()</slot>
+  <slot>action_esc_triggered()</slot>
+  <slot>action_setting_triggered()</slot>
+  <slot>button_clearMessage_clicked()</slot>
  </slots>
 </ui>

@@ -11,11 +11,13 @@
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -25,17 +27,20 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "mycombobox.h"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_EncryptionClass
 {
 public:
+    QAction *action_setting;
+    QAction *action_esc;
     QWidget *centralWidget;
     QPushButton *button_encrypt;
     QPushButton *button_decrypt;
-    QPushButton *button_decrypt_2;
-    QPushButton *button_decrypt_3;
+    QPushButton *button_wirteIC;
+    QPushButton *button_readIC;
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_10;
     QVBoxLayout *verticalLayout;
@@ -102,7 +107,11 @@ public:
     QLabel *label_cal8;
     QLineEdit *lineEdit_cal8;
     QTextBrowser *textBrowser_message;
+    QLabel *label_port;
+    MyComboBox *comboBox_port;
+    QPushButton *button_clearMessage;
     QMenuBar *menuBar;
+    QMenu *menusetting;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -114,27 +123,31 @@ public:
         QIcon icon;
         icon.addFile(QStringLiteral(":/Encryption/dongnan.png"), QSize(), QIcon::Normal, QIcon::Off);
         EncryptionClass->setWindowIcon(icon);
+        action_setting = new QAction(EncryptionClass);
+        action_setting->setObjectName(QStringLiteral("action_setting"));
+        action_esc = new QAction(EncryptionClass);
+        action_esc->setObjectName(QStringLiteral("action_esc"));
         centralWidget = new QWidget(EncryptionClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         button_encrypt = new QPushButton(centralWidget);
         button_encrypt->setObjectName(QStringLiteral("button_encrypt"));
-        button_encrypt->setGeometry(QRect(530, 100, 120, 30));
+        button_encrypt->setGeometry(QRect(530, 20, 120, 30));
         QFont font;
         font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font.setPointSize(12);
         button_encrypt->setFont(font);
         button_decrypt = new QPushButton(centralWidget);
         button_decrypt->setObjectName(QStringLiteral("button_decrypt"));
-        button_decrypt->setGeometry(QRect(530, 150, 120, 30));
+        button_decrypt->setGeometry(QRect(530, 70, 120, 30));
         button_decrypt->setFont(font);
-        button_decrypt_2 = new QPushButton(centralWidget);
-        button_decrypt_2->setObjectName(QStringLiteral("button_decrypt_2"));
-        button_decrypt_2->setGeometry(QRect(530, 200, 120, 30));
-        button_decrypt_2->setFont(font);
-        button_decrypt_3 = new QPushButton(centralWidget);
-        button_decrypt_3->setObjectName(QStringLiteral("button_decrypt_3"));
-        button_decrypt_3->setGeometry(QRect(530, 250, 120, 30));
-        button_decrypt_3->setFont(font);
+        button_wirteIC = new QPushButton(centralWidget);
+        button_wirteIC->setObjectName(QStringLiteral("button_wirteIC"));
+        button_wirteIC->setGeometry(QRect(530, 120, 120, 30));
+        button_wirteIC->setFont(font);
+        button_readIC = new QPushButton(centralWidget);
+        button_readIC->setObjectName(QStringLiteral("button_readIC"));
+        button_readIC->setGeometry(QRect(530, 170, 120, 30));
+        button_readIC->setFont(font);
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(20, 20, 478, 543));
@@ -163,7 +176,7 @@ public:
         lineEdit_province = new QLineEdit(layoutWidget);
         lineEdit_province->setObjectName(QStringLiteral("lineEdit_province"));
         lineEdit_province->setEnabled(true);
-        lineEdit_province->setMinimumSize(QSize(340, 30));
+        lineEdit_province->setMinimumSize(QSize(360, 30));
         QFont font1;
         font1.setFamily(QStringLiteral("Consolas"));
         font1.setPointSize(14);
@@ -194,7 +207,7 @@ public:
         lineEdit_expData = new QLineEdit(layoutWidget);
         lineEdit_expData->setObjectName(QStringLiteral("lineEdit_expData"));
         lineEdit_expData->setEnabled(true);
-        lineEdit_expData->setMinimumSize(QSize(340, 30));
+        lineEdit_expData->setMinimumSize(QSize(360, 30));
         lineEdit_expData->setFont(font1);
         lineEdit_expData->setMaxLength(8);
 
@@ -220,7 +233,7 @@ public:
         lineEdit_reagentApp = new QLineEdit(layoutWidget);
         lineEdit_reagentApp->setObjectName(QStringLiteral("lineEdit_reagentApp"));
         lineEdit_reagentApp->setEnabled(true);
-        lineEdit_reagentApp->setMinimumSize(QSize(340, 30));
+        lineEdit_reagentApp->setMinimumSize(QSize(360, 30));
         lineEdit_reagentApp->setFont(font1);
         lineEdit_reagentApp->setMaxLength(2);
 
@@ -246,7 +259,7 @@ public:
         lineEdit_reagentID = new QLineEdit(layoutWidget);
         lineEdit_reagentID->setObjectName(QStringLiteral("lineEdit_reagentID"));
         lineEdit_reagentID->setEnabled(true);
-        lineEdit_reagentID->setMinimumSize(QSize(340, 30));
+        lineEdit_reagentID->setMinimumSize(QSize(360, 30));
         QFont font2;
         font2.setFamily(QStringLiteral("Consolas"));
         font2.setPointSize(14);
@@ -275,7 +288,7 @@ public:
         lineEdit_reagentNum = new QLineEdit(layoutWidget);
         lineEdit_reagentNum->setObjectName(QStringLiteral("lineEdit_reagentNum"));
         lineEdit_reagentNum->setEnabled(true);
-        lineEdit_reagentNum->setMinimumSize(QSize(340, 30));
+        lineEdit_reagentNum->setMinimumSize(QSize(360, 30));
         lineEdit_reagentNum->setFont(font2);
         lineEdit_reagentNum->setMaxLength(3);
         lineEdit_reagentNum->setReadOnly(false);
@@ -303,9 +316,10 @@ public:
         lineEdit_FxKey = new QLineEdit(layoutWidget);
         lineEdit_FxKey->setObjectName(QStringLiteral("lineEdit_FxKey"));
         lineEdit_FxKey->setEnabled(true);
-        lineEdit_FxKey->setMinimumSize(QSize(340, 30));
+        lineEdit_FxKey->setMinimumSize(QSize(360, 30));
         lineEdit_FxKey->setFont(font2);
         lineEdit_FxKey->setMaxLength(32767);
+        lineEdit_FxKey->setEchoMode(QLineEdit::Password);
         lineEdit_FxKey->setReadOnly(true);
 
         horizontalLayout_4->addWidget(lineEdit_FxKey);
@@ -331,7 +345,7 @@ public:
         lineEdit_DxKey = new QLineEdit(layoutWidget);
         lineEdit_DxKey->setObjectName(QStringLiteral("lineEdit_DxKey"));
         lineEdit_DxKey->setEnabled(true);
-        lineEdit_DxKey->setMinimumSize(QSize(340, 30));
+        lineEdit_DxKey->setMinimumSize(QSize(360, 30));
         lineEdit_DxKey->setFont(font2);
         lineEdit_DxKey->setMaxLength(16);
         lineEdit_DxKey->setReadOnly(true);
@@ -359,9 +373,10 @@ public:
 
         textEdit_ciphertext = new QTextEdit(layoutWidget);
         textEdit_ciphertext->setObjectName(QStringLiteral("textEdit_ciphertext"));
-        textEdit_ciphertext->setMinimumSize(QSize(340, 0));
+        textEdit_ciphertext->setMinimumSize(QSize(360, 0));
         textEdit_ciphertext->setMaximumSize(QSize(340, 50));
         textEdit_ciphertext->setFont(font2);
+        textEdit_ciphertext->setFocusPolicy(Qt::NoFocus);
 
         horizontalLayout_6->addWidget(textEdit_ciphertext);
 
@@ -385,7 +400,7 @@ public:
 
         textEdit_sha = new QTextEdit(layoutWidget);
         textEdit_sha->setObjectName(QStringLiteral("textEdit_sha"));
-        textEdit_sha->setMinimumSize(QSize(340, 0));
+        textEdit_sha->setMinimumSize(QSize(360, 0));
         textEdit_sha->setMaximumSize(QSize(16777215, 50));
         textEdit_sha->setFont(font2);
         textEdit_sha->setFocusPolicy(Qt::NoFocus);
@@ -596,10 +611,25 @@ public:
         textBrowser_message->setFont(font);
         textBrowser_message->setFrameShape(QFrame::WinPanel);
         textBrowser_message->setFrameShadow(QFrame::Sunken);
+        label_port = new QLabel(centralWidget);
+        label_port->setObjectName(QStringLiteral("label_port"));
+        label_port->setGeometry(QRect(530, 230, 120, 30));
+        label_port->setFont(font);
+        label_port->setAlignment(Qt::AlignCenter);
+        comboBox_port = new MyComboBox(centralWidget);
+        comboBox_port->setObjectName(QStringLiteral("comboBox_port"));
+        comboBox_port->setGeometry(QRect(530, 260, 120, 30));
+        comboBox_port->setFont(font);
+        button_clearMessage = new QPushButton(centralWidget);
+        button_clearMessage->setObjectName(QStringLiteral("button_clearMessage"));
+        button_clearMessage->setGeometry(QRect(530, 530, 120, 30));
+        button_clearMessage->setFont(font);
         EncryptionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EncryptionClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 685, 23));
+        menusetting = new QMenu(menuBar);
+        menusetting->setObjectName(QStringLiteral("menusetting"));
         EncryptionClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(EncryptionClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -608,10 +638,20 @@ public:
         statusBar->setObjectName(QStringLiteral("statusBar"));
         EncryptionClass->setStatusBar(statusBar);
 
+        menuBar->addAction(menusetting->menuAction());
+        menusetting->addAction(action_setting);
+        menusetting->addAction(action_esc);
+
         retranslateUi(EncryptionClass);
         QObject::connect(button_encrypt, SIGNAL(clicked()), EncryptionClass, SLOT(button_encrypt_clicked()));
         QObject::connect(button_decrypt, SIGNAL(clicked()), EncryptionClass, SLOT(button_decrypt_clicked()));
         QObject::connect(textBrowser_message, SIGNAL(textChanged()), EncryptionClass, SLOT(textBrowser_message_textChanged()));
+        QObject::connect(button_wirteIC, SIGNAL(clicked()), EncryptionClass, SLOT(button_writeIC_clicked()));
+        QObject::connect(button_readIC, SIGNAL(clicked()), EncryptionClass, SLOT(button_readIC_clicked()));
+        QObject::connect(comboBox_port, SIGNAL(clicked()), EncryptionClass, SLOT(comboBox_port_clicked()));
+        QObject::connect(action_esc, SIGNAL(triggered()), EncryptionClass, SLOT(action_esc_triggered()));
+        QObject::connect(action_setting, SIGNAL(triggered()), EncryptionClass, SLOT(action_setting_triggered()));
+        QObject::connect(button_clearMessage, SIGNAL(clicked()), EncryptionClass, SLOT(button_clearMessage_clicked()));
 
         QMetaObject::connectSlotsByName(EncryptionClass);
     } // setupUi
@@ -619,10 +659,12 @@ public:
     void retranslateUi(QMainWindow *EncryptionClass)
     {
         EncryptionClass->setWindowTitle(QApplication::translate("EncryptionClass", "Encryption", nullptr));
+        action_setting->setText(QApplication::translate("EncryptionClass", "Setting", nullptr));
+        action_esc->setText(QApplication::translate("EncryptionClass", "ESC", nullptr));
         button_encrypt->setText(QApplication::translate("EncryptionClass", "\345\212\240\345\257\206", nullptr));
         button_decrypt->setText(QApplication::translate("EncryptionClass", "\350\247\243\345\257\206", nullptr));
-        button_decrypt_2->setText(QApplication::translate("EncryptionClass", "\345\206\231\345\205\245IC\345\215\241", nullptr));
-        button_decrypt_3->setText(QApplication::translate("EncryptionClass", "\350\257\273\345\217\226IC\345\215\241", nullptr));
+        button_wirteIC->setText(QApplication::translate("EncryptionClass", "\345\206\231\345\205\245IC\345\215\241", nullptr));
+        button_readIC->setText(QApplication::translate("EncryptionClass", "\350\257\273\345\217\226IC\345\215\241", nullptr));
         label_province->setText(QApplication::translate("EncryptionClass", "\347\234\201\344\273\275\357\274\232", nullptr));
         label_expData->setText(QApplication::translate("EncryptionClass", "\346\234\211\346\225\210\346\227\245\346\234\237\357\274\232", nullptr));
         label_reagentApp->setText(QApplication::translate("EncryptionClass", "\350\257\225\345\211\202\345\272\224\347\224\250\357\274\232", nullptr));
@@ -644,6 +686,9 @@ public:
         label_cal6->setText(QApplication::translate("EncryptionClass", "\346\240\207\345\256\232\345\200\2746\357\274\232", nullptr));
         label_cal7->setText(QApplication::translate("EncryptionClass", "\346\240\207\345\256\232\345\200\2747\357\274\232", nullptr));
         label_cal8->setText(QApplication::translate("EncryptionClass", "\346\240\207\345\256\232\345\200\2748\357\274\232", nullptr));
+        label_port->setText(QApplication::translate("EncryptionClass", "\351\200\211\346\213\251\344\270\262\345\217\243\357\274\232", nullptr));
+        button_clearMessage->setText(QApplication::translate("EncryptionClass", "\346\270\205\347\251\272\346\266\210\346\201\257\346\240\217", nullptr));
+        menusetting->setTitle(QApplication::translate("EncryptionClass", "\350\217\234\345\215\225", nullptr));
     } // retranslateUi
 
 };
