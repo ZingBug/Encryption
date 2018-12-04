@@ -30,13 +30,20 @@ void Setting::button_modify_clicked()
 {
 	string str_key = qstr2str(ui.lineEdit_key->text());
 	string str_salt = qstr2str(ui.lineEdit_salt->text());
-	if (str_key.length() == 0 || str_salt.length() == 0)
+	if (str_key.length() == 0 && str_salt.length() == 0)
 	{
 		QMessageBox::about(NULL, "Tips", "Input can not be empty!");
 		return;
 	}
-	bool b = RWIniFile::writeIni(RWIniFile::iniPath, "config1", "key", str2qstr(str_key));
-	b &= RWIniFile::writeIni(RWIniFile::iniPath, "config1", "salt", str2qstr(str_salt));
+	bool b = false;
+	if (str_key.length() != 0)
+	{
+		b = RWIniFile::writeIni(RWIniFile::iniPath, "config1", "key", str2qstr(str_key));
+	}
+	if (str_salt.length() != 0)
+	{
+		b = RWIniFile::writeIni(RWIniFile::iniPath, "config1", "salt", str2qstr(str_salt));
+	}
 	if (b)
 	{
 		QMessageBox::about(NULL, "Tips", "Modify settings successfully!");
