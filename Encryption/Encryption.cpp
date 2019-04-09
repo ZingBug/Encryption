@@ -398,8 +398,23 @@ wchar_t *Encryption::multiByteToWideChar(string str)
 
 void Encryption::button_readIC_clicked()
 {
-	string com = qstr2str(ui.comboBox_port->currentText());
-	const char* ccom = com.c_str();
+	string comTemp = qstr2str(ui.comboBox_port->currentText());
+	if (comTemp.size() == 0)
+	{
+		QString str = str2qstr(string("´®¿Ú´íÎó!\n"));
+		QColor clrG(255, 0, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	string strcom = comTemp.substr(3);
+	int num = atoi(strcom.c_str());
+	string com;
+	if (num >= 10)
+		com = "\\\\.\\" + comTemp;
+	else
+		com = comTemp;
+	//const char* ccom = com.c_str();
 	SerialCard card;
 	bool flag = card.OpenSeialPort(multiByteToWideChar(com));
 	if (!flag)
@@ -435,7 +450,24 @@ void Encryption::button_readIC_clicked()
 
 void Encryption::button_writeIC_clicked()
 {
-	string com = qstr2str(ui.comboBox_port->currentText());
+	string comTemp = qstr2str(ui.comboBox_port->currentText());
+	if (comTemp.size() == 0)
+	{
+		QString str = str2qstr(string("´®¿Ú´íÎó!\n"));
+		QColor clrG(255, 0, 0);
+		stringToHtml(str, clrG);
+		ui.textBrowser_message->insertHtml(str);
+		return;
+	}
+	string strcom = comTemp.substr(3);
+	int num = atoi(strcom.c_str());
+	string com;
+	if (num >= 10)
+		com = "\\\\.\\" + comTemp;
+	else
+		com = comTemp;
+	//const char* ccom = com.c_str();
+	//string com = qstr2str(ui.comboBox_port->currentText());
 	string pwd = qstr2str(ui.textEdit_ciphertext->toPlainText());
 	if (pwd.length() != 64)
 	{

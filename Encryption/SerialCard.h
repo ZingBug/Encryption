@@ -20,7 +20,7 @@ public:
 	SerialCard();
 	~SerialCard();
 	//打开串口，默认波特率57600，数据位8位，停止位一位，无奇偶校验位
-	bool OpenSeialPort(const TCHAR* port, UINT baud_rate = CBR_57600, UINT databits = DATABITS_8, BYTE stop_bit = ONESTOPBIT, BYTE parity = NOPARITY);
+	bool OpenSeialPort(const TCHAR* port, UINT baud_rate = CBR_19200, UINT databits = DATABITS_8, BYTE stop_bit = ONESTOPBIT, BYTE parity = NOPARITY);
 	void ClosePort();
 	bool WriteData(UChar* pData, unsigned int length);//写串口数据
 	int ReadData(UChar* data);//读串口数据//, DWORD length, UINT BytesInCom);
